@@ -73,25 +73,45 @@ switch (true) {
 
 console.log("============Part 2============");
 // Part 2: Thinking Bigger
-let plantCount = 100;
-let loop = true;
-let weekCount = 0;
-let space = 0;
-let radiusPart2 = 0;
-while (loop) {
-  plantCount = plantCount * 2;
-  weekCount++;
-  //   console.log("============Week " + weekCount + "============");
-  //   console.log("Plant count: " + plantCount);
-  //   console.log("Space taken: " + plantCount * minSpace);
-  if (weekCount === 10) {
-    loop = false;
-    space = plantCount * minSpace;
-  }
-}
-radiusPart2 = Math.sqrt(space / PI);
+const initialPlantCount = 100;
+const weeks = 10;
+// while (loop) {
+//   plantCount = plantCount * 2;
+//   weekCount++;
+//   //   console.log("============Week " + weekCount + "============");
+//   //   console.log("Plant count: " + plantCount);
+//   //   console.log("Space taken: " + plantCount * minSpace);
+//   if (weekCount === 10) {
+//     loop = false;
+//     space = plantCount * minSpace;
+//   }
+// }
 
+// Calculate the final plant count after 10 weeks
+const finalPlantCount = initialPlantCount * Math.pow(growthRate, weeks);
+// Calculate the total space required for the plants
+const space = finalPlantCount * minSpace;
+const radiusPart2 = Math.sqrt(space / PI);
 console.log(
   "The radius of the expanded circular garden should be: ",
   radiusPart2.toFixed(1) + "m"
 );
+
+console.log("============Part 3============");
+
+try {
+  const startingPlantsPart3 = 100;
+  const areaPart3 = PI * radius * radius;
+  const requiredSpace = startingPlantsPart3 * minSpace;
+
+  if (requiredSpace > areaPart3) {
+    throw new Error("Not enough space in the garden for the plants");
+  } else {
+    console.log("The plants fit within the garden.");
+    console.log(
+      "Space taken: " + ((requiredSpace / areaPart3) * 100).toFixed(1) + "%"
+    );
+  }
+} catch (error) {
+  console.log("Error: " + error.message);
+}
